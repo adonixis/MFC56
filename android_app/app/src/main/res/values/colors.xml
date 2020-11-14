@@ -12,4 +12,7 @@
 
     <color name="google_red">#CE5658</color>
     <color name="facebook_blue">#647DAF</color>
+
+    <color name="red">#B71C1C</color>
+    <color name="green">#07867B</color>
 </resources>
