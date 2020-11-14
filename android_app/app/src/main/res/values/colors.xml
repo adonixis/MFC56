@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="brown_200">#DCC2A1</color>
-    <color name="brown_500">#C79B65</color>
-    <color name="brown_700">#663A2A</color>
-    <color name="orange_200">#F46B58</color>
-    <color name="orange_700">#E84B37</color>
+    <color name="brown_500">#C39367</color>
+    <color name="brown_700">#623B2A</color>
+    <color name="red_200">#F46B58</color>
+    <color name="red_700">#E04E39</color>
 
-    <color name="black">#FF000000</color>
+    <color name="black">#2C2A29</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
