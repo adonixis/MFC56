@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -17,9 +18,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.view.*
 import ru.adonixis.mfc56.R
@@ -94,6 +97,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnLogout.setOnClickListener { logOut() }
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                val token = task.result
+
+                val msg = getString(R.string.msg_token_fmt, token)
+                Log.d(TAG, msg)
+            })
         }
 
     }

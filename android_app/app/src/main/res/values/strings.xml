@@ -33,6 +33,9 @@
     <string name="snackbar_action_hide">Скрыть</string>
 
     <string name="title_status">Статус заявления</string>
+    <string name="title_oktmo">Справочник ОКТМО</string>
+
+    <string name="msg_token_fmt">FCM Token: %s</string>
 
     <string name="facebook_application_id" translatable="false">379706986676721</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb379706986676721</string>

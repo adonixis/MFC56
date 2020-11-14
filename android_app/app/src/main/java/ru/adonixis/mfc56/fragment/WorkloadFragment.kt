@@ -75,7 +75,7 @@ class WorkloadFragment : Fragment() {
         }
 
         val dialog: AlertDialog.Builder = AlertDialog.Builder(context)
-        dialog.setTitle("Справочник ОКТМО")
+        dialog.setTitle(getString(R.string.title_oktmo))
         val types: Array<String> = listOktmo.toTypedArray()
         dialog.setItems(types) { dialog, which ->
             dialog.dismiss()
