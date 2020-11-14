@@ -1,9 +1,28 @@
 <resources>
     <string name="app_name">МФЦ 56</string>
 
+    <string name="title_activity_login">Авторизация</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_appointment">Предварительная запись</string>
+    <string name="menu_check_status">Проверка статуса заявления</string>
+    <string name="menu_workload">Загрузка офисов</string>
+    <string name="menu_info">Справочная информация</string>
+
+    <string name="btn_logout">Выйти</string>
+    <string name="btn_google">Войти через Google</string>
+    <string name="btn_facebook">Войти через Facebook</string>
+
+    <string name="text_onboarding_title">МФЦ 56</string>
+    <string name="text_onboarding">Приложение для работы с МФЦ Оренбургской области</string>
+
+    <string name="progress_message_uploading">Загрузка</string>
+
     <string name="facebook_application_id" translatable="false">379706986676721</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb379706986676721</string>
-    <!--string name="facebook_login_protocol_scheme" translatable="false">fb379706986676721</string-->
-    <string name="google_client_id" translatable="false">37415298559-lkglh5leceu4p6dhtvbvh26h3gnk40ak.apps.googleusercontent.com</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb379706986676721</string>
+    <string name="google_client_id" translatable="false">472028514972-42lt1lfs1u9mcl6fp0d94imbc0pfo25a.apps.googleusercontent.com</string>
 
 </resources>
