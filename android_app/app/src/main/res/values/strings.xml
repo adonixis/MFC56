@@ -9,7 +9,7 @@
 
     <string name="menu_appointment">Предварительная запись</string>
     <string name="menu_check_status">Проверка статуса заявления</string>
-    <string name="menu_workload">Загрузка офисов</string>
+    <string name="menu_workload">Загруженность офисов</string>
     <string name="menu_info">Справочная информация</string>
 
     <string name="btn_logout">Выйти</string>

@@ -2,14 +2,12 @@ package ru.adonixis.mfc56.fragment
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,11 +28,7 @@ class CheckStatusFragment : Fragment() {
     private var progressDialog: ProgressDialog? = null
     private var rootView: View? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_check_status, container, false)
         rootView = root.findViewById(R.id.root_view)
         inputDealNumber = root.findViewById(R.id.input_deal_number)
@@ -55,8 +49,8 @@ class CheckStatusFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.checkStatusLiveData.observe(viewLifecycleOwner, Observer { showStatus(it) })
-        viewModel.errorMessageLiveData.observe(viewLifecycleOwner, Observer { showError(it) })
+        viewModel.getCheckStatusLiveData().observe(viewLifecycleOwner, Observer { showStatus(it) })
+        viewModel.getErrorMessageLiveData().observe(viewLifecycleOwner, Observer { showError(it) })
     }
 
     private fun checkStatus() {
@@ -68,11 +62,11 @@ class CheckStatusFragment : Fragment() {
         viewModel.checkStatus(dealNumber, pinCode)
     }
 
-    private fun showStatus(it: StatusResponse?) {
+    private fun showStatus(it: StatusResponse) {
         progressDialog!!.dismiss()
         AlertDialog.Builder(context)
             .setTitle(getString(R.string.title_status))
-            .setMessage(it?.name)
+            .setMessage(it.name)
             .setPositiveButton(android.R.string.yes
             ) { dialog, which ->
                 dialog.dismiss()
@@ -82,17 +76,14 @@ class CheckStatusFragment : Fragment() {
 
     private fun showError(error: String) {
         progressDialog!!.dismiss()
-        showErrorMessage(error)
-    }
-
-    fun showErrorMessage(errorMessage: String) {
         showSnackbar(
             rootView!!, Snackbar.Callback(),
             ContextCompat.getColor(requireContext(), R.color.red),
             Color.WHITE,
-            errorMessage,
+            error,
             Color.WHITE,
             getString(R.string.snackbar_action_hide), null
         )
     }
+
 }
