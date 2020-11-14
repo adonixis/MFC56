@@ -16,16 +16,19 @@
     <string name="btn_google">Войти через Google</string>
     <string name="btn_facebook">Войти через Facebook</string>
     <string name="btn_save">Сохранить</string>
+    <string name="btn_check">Проверить статус заявления</string>
 
     <string name="hint_fio">ФИО</string>
     <string name="hint_snils">СНИЛС</string>
     <string name="hint_email">E-mail</string>
     <string name="hint_phone">Телефон</string>
+    <string name="hint_deal_number">Номер дела (последние 8 цифр)</string>
+    <string name="hint_pin_code">Пин-код</string>
 
     <string name="text_onboarding_title">МФЦ 56</string>
     <string name="text_onboarding">Приложение для работы с МФЦ Оренбургской области</string>
 
-    <string name="progress_message_uploading">Загрузка</string>
+    <string name="progress_loading">Загрузка…</string>
 
     <string name="facebook_application_id" translatable="false">379706986676721</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb379706986676721</string>

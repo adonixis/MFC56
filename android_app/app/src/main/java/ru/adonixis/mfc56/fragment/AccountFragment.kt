@@ -1,6 +1,5 @@
 package ru.adonixis.mfc56.fragment
 
-import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -8,23 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login.*
 import ru.adonixis.mfc56.R
-import ru.adonixis.mfc56.activity.LoginActivity
 
 class AccountFragment : Fragment() {
 
     companion object {
         private const val TAG = "AccountFragment"
-        private const val IS_LOGIN = "isLogin"
         private const val USER_ID = "userId"
         private const val EMAIL = "email"
         private const val NAME = "name"
-        private const val PHOTO_URL = "photoUrl"
         private const val PHONE = "phone"
         private const val SNILS = "snils"
     }
@@ -54,7 +47,7 @@ class AccountFragment : Fragment() {
         inputSnils = root.findViewById(R.id.input_snils)
         inputEmail = root.findViewById(R.id.input_email)
         inputPhone = root.findViewById(R.id.input_phone)
-        val btnSave = root.findViewById<Button>(R.id.btnSave)
+        val btnSave = root.findViewById<Button>(R.id.btn_save)
         btnSave.setOnClickListener { saveInfo() }
         return root
     }
