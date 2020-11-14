@@ -6,6 +6,11 @@
     app:startDestination="@+id/nav_appointment">
 
     <fragment
+        android:id="@+id/nav_account"
+        android:name="ru.adonixis.mfc56.fragment.AccountFragment"
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
         android:id="@+id/nav_appointment"
         android:name="ru.adonixis.mfc56.fragment.AppointmentFragment"
         tools:layout="@layout/fragment_appointment" />

@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
         private const val EMAIL = "email"
         private const val NAME = "name"
         private const val PHOTO_URL = "photoUrl"
+        private const val PHONE = "phone"
     }
     private lateinit var callbackManager: CallbackManager
     private lateinit var auth: FirebaseAuth
@@ -176,6 +177,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString(EMAIL, user.email)
         editor.putString(NAME, user.displayName)
         editor.putString(PHOTO_URL, user.photoUrl.toString())
+        editor.putString(PHONE, user.phoneNumber)
         editor.apply()
         startMainActivity()
     }

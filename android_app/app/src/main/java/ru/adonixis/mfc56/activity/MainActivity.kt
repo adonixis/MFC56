@@ -3,15 +3,14 @@ package ru.adonixis.mfc56.activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -34,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         private const val EMAIL = "email"
         private const val NAME = "name"
         private const val PHOTO_URL = "photoUrl"
+        private const val PHONE = "phone"
     }
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var settings: SharedPreferences
@@ -87,6 +87,11 @@ class MainActivity : AppCompatActivity() {
                 .apply(RequestOptions().circleCrop())
                 .placeholder(R.drawable.ic_person)
                 .into(imageViewAvatar)
+
+            navView.getHeaderView(0).setOnClickListener {
+                navController.navigate(R.id.nav_account)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
 
             btnLogout.setOnClickListener { logOut() }
         }

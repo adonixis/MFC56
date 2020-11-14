@@ -7,7 +7,7 @@
                 android:radius="12dp"
                 />
             <solid
-                android:color="@color/brown_200"/>
+                android:color="@color/red_200"/>
         </shape>
     </item>
 </ripple>

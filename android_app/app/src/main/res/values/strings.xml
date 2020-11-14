@@ -15,6 +15,12 @@
     <string name="btn_logout">Выйти</string>
     <string name="btn_google">Войти через Google</string>
     <string name="btn_facebook">Войти через Facebook</string>
+    <string name="btn_save">Сохранить</string>
+
+    <string name="hint_fio">ФИО</string>
+    <string name="hint_snils">СНИЛС</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_phone">Телефон</string>
 
     <string name="text_onboarding_title">МФЦ 56</string>
     <string name="text_onboarding">Приложение для работы с МФЦ Оренбургской области</string>

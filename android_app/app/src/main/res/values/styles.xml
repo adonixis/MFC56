@@ -20,14 +20,14 @@
         <item name="android:background">@drawable/bg_btn_google_red</item>
     </style>
 
-    <style name="Theme.MFC56.Button.Yellow" parent="Theme.MFC56.Button">
+    <style name="Theme.MFC56.Button.Red" parent="Theme.MFC56.Button">
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:fontFamily">@font/product_sans_bold</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:background">@drawable/bg_btn_brown</item>
+        <item name="android:background">@drawable/bg_btn_red</item>
     </style>
 
 </resources>
