@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivHamburger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/black"
+        android:textColor="@color/brown_700"
         android:textSize="24sp"
         android:text="@string/app_name"
         />

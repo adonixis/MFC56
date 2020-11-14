@@ -16,8 +16,6 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_info, container, false)
-        val textView: TextView = root.findViewById(R.id.text_view)
-        textView.text = "Справочная информация"
         return root
     }
 }
