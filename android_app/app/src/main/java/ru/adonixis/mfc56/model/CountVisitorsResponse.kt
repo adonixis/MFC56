@@ -9,5 +9,14 @@ data class CountVisitorsResponse(
     val endDate: String,
     val reportData: List<Object>,
     val plainReportData: List<Object>,
-    val reportCountVisitorsData: List<Object>
+    val reportCountVisitorsData: List<ReportCountVisitorsData>
+)
+
+data class ReportCountVisitorsData(
+    val serviceName: String,
+    val serviceId: Int,
+    val applicantsCount: Int,
+    val applicantsInTimeCount: String? = null,
+    val applicantsOutOfTimeCount: String? = null,
+    val averageTimeInQueue: String? = null
 )

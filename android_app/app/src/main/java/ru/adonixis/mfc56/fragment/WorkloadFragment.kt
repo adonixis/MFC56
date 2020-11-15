@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -16,10 +17,9 @@ import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.todorant.android.util.AlertUtils
 import ru.adonixis.mfc56.R
-import ru.adonixis.mfc56.model.CountVisitorsResponse
-import ru.adonixis.mfc56.model.OktmoObject
-import ru.adonixis.mfc56.model.OktmoObjectsResponse
+import ru.adonixis.mfc56.model.*
 import ru.adonixis.mfc56.viewmodel.WorkloadViewModel
+import java.lang.StringBuilder
 import java.util.*
 
 
@@ -29,10 +29,17 @@ class WorkloadFragment : Fragment() {
     private var progressDialog: ProgressDialog? = null
     private var rootView: View? = null
     private var oktmoObjects: MutableList<OktmoObject> = mutableListOf()
+    private var oktmoUnits: MutableList<OktmoUnit> = mutableListOf()
+
+    private var oktmoId: Int? = null
+    private var unitId: Int? = null
+
+    private lateinit var tvApplicantsCount: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_workload, container, false)
         rootView = root.findViewById(R.id.root_view)
+        tvApplicantsCount = root.findViewById(R.id.tv_applicants_count)
         return root
     }
 
@@ -48,16 +55,12 @@ class WorkloadFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.getOktmoObjectsLiveData().observe(viewLifecycleOwner, Observer { showOktmoObjects(it) })
+        viewModel.getUnitsLiveData().observe(viewLifecycleOwner, Observer { showUnits(it) })
         viewModel.getCountVisitorsLiveData().observe(viewLifecycleOwner, Observer { showCountVisitors(it) })
         viewModel.getErrorMessageLiveData().observe(viewLifecycleOwner, Observer { showError(it) })
 
         viewModel.getOktmoObjects()
         progressDialog!!.show()
-    }
-
-    private fun showCountVisitors(it: CountVisitorsResponse) {
-        progressDialog!!.dismiss()
-
     }
 
     private fun showOktmoObjects(it: OktmoObjectsResponse) {
@@ -75,11 +78,50 @@ class WorkloadFragment : Fragment() {
         val types: Array<String> = listOktmo.toTypedArray()
         dialog.setItems(types) { dialog, which ->
             dialog.dismiss()
-            val oktmoId = oktmoObjects[which].id
-            viewModel.getCountVisitors(oktmoId!!)
+            oktmoId = oktmoObjects[which].id
+            viewModel.getUnits(oktmoId!!)
             progressDialog!!.show()
         }
         dialog.show()
+    }
+
+    private fun showUnits(it: UnitsResponse) {
+        progressDialog!!.dismiss()
+        oktmoUnits.clear()
+        oktmoUnits.addAll(it.embeddedUnits.oktmoUnits)
+
+        val listUnits: MutableList<String> = mutableListOf()
+        for (item in oktmoUnits) {
+            listUnits.add(item.shortName!!)
+        }
+
+        val dialog: AlertDialog.Builder = AlertDialog.Builder(context)
+        dialog.setTitle(getString(R.string.title_units_oktmo))
+        val types: Array<String> = listUnits.toTypedArray()
+        dialog.setItems(types) { dialog, which ->
+            dialog.dismiss()
+            unitId = oktmoUnits[which].id
+            progressDialog!!.show()
+            viewModel.getCountVisitors(unitId!!)
+        }
+        dialog.show()
+    }
+
+    private fun showCountVisitors(it: CountVisitorsResponse) {
+        progressDialog!!.dismiss()
+
+        val sb = StringBuilder()
+        sb.append("Количество людей в офисе МФЦ:")
+        sb.append('\n')
+        sb.append('\n')
+        for (item in it.reportCountVisitorsData) {
+            sb.append(item.serviceName)
+            sb.append(" — ")
+            sb.append(item.applicantsCount)
+            sb.append('\n')
+        }
+
+        tvApplicantsCount.text = sb
     }
 
     private fun showError(error: String) {

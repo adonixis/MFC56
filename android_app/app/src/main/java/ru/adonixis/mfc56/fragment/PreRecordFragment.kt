@@ -211,16 +211,6 @@ class PreRecordFragment : Fragment() {
     private fun showTicket(it: TicketResponse) {
         progressDialog!!.dismiss()
 
-        val listBookingDates: MutableList<String> = mutableListOf()
-        for (item in bookingDates) {
-            listBookingDates.add(
-                item.timeFrom!!.substring(0, 10) + " " + item.timeFrom!!.substring(
-                    11,
-                    16
-                ) + " - " + item.timeTo!!.substring(11, 16)
-            )
-        }
-
         tvPinCode.text = "Ваш пин-код - ${it.pin}"
     }
 

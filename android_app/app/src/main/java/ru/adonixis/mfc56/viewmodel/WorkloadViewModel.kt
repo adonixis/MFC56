@@ -17,6 +17,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import retrofit2.HttpException
 import ru.adonixis.mfc56.model.CountVisitorsRequest
+import ru.adonixis.mfc56.model.UnitsResponse
 import rx.Subscriber
 import java.io.IOException
 
@@ -26,6 +27,7 @@ class WorkloadViewModel : ViewModel() {
     }
     private var countVisitorsLiveData: MutableLiveData<CountVisitorsResponse>? = null
     var oktmoObjectsLiveData: MutableLiveData<OktmoObjectsResponse>? = null
+    var unitsLiveData: MutableLiveData<UnitsResponse>? = null
     var errorMessageLiveData: MutableLiveData<String>? = null
 
     fun getCountVisitorsLiveData(): LiveData<CountVisitorsResponse> {
@@ -36,6 +38,11 @@ class WorkloadViewModel : ViewModel() {
     fun getOktmoObjectsLiveData(): LiveData<OktmoObjectsResponse> {
         oktmoObjectsLiveData = MutableLiveData()
         return oktmoObjectsLiveData as MutableLiveData<OktmoObjectsResponse>
+    }
+
+    fun getUnitsLiveData(): LiveData<UnitsResponse> {
+        unitsLiveData = MutableLiveData()
+        return unitsLiveData as MutableLiveData<UnitsResponse>
     }
 
     fun getErrorMessageLiveData(): LiveData<String> {
@@ -89,6 +96,56 @@ class WorkloadViewModel : ViewModel() {
 
                 override fun onNext(t: OktmoObjectsResponse?) {
                     oktmoObjectsLiveData!!.setValue(t)
+                }
+            })
+    }
+
+    fun getUnits(oktmoID: Int) {
+        val service = ServiceFactory.getMfcRecordService()
+        service!!.getUnits(oktmoID)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Subscriber<UnitsResponse?>() {
+                override fun onCompleted() {}
+                override fun onError(e: Throwable) {
+                    if (e is HttpException) {
+                        if (e.code() == 504) {
+                            Log.e(TAG, "Get units failed: $e")
+                            errorMessageLiveData!!.setValue("Check your internet connection")
+                            return
+                        }
+                        val body = e.response()!!.errorBody()
+                        try {
+                            val jObjError = JSONObject(body!!.string())
+                            var message = ""
+                            if (jObjError.has("message")) {
+                                message = jObjError["message"] as String
+                            } else if (jObjError.has("errors")) {
+                                val errors = jObjError["errors"] as JSONArray
+                                val error = errors[0] as JSONObject
+                                val messages = error["messages"] as JSONArray
+                                message = messages[0] as String
+                            }
+                            Log.e(TAG, "Get units failed: $message")
+                            errorMessageLiveData!!.setValue(message)
+                        } catch (ex: JSONException) {
+                            Log.e(TAG, "Get units failed: ", ex)
+                            errorMessageLiveData!!.setValue("Unknown error")
+                        } catch (ex: IOException) {
+                            Log.e(TAG, "Get units failed: ", ex)
+                            errorMessageLiveData!!.setValue("Unknown error")
+                        }
+                    } else if (e is IOException) {
+                        Log.e(TAG, "Get units failed: ", e)
+                        errorMessageLiveData!!.setValue("Check your internet connection")
+                    } else {
+                        Log.e(TAG, "Get units failed: ", e)
+                        errorMessageLiveData!!.setValue("Unknown error")
+                    }
+                }
+
+                override fun onNext(t: UnitsResponse?) {
+                    unitsLiveData!!.setValue(t)
                 }
             })
     }
