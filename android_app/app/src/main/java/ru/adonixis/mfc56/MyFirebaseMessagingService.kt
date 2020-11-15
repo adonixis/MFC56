@@ -5,8 +5,10 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.media.RingtoneManager
 import android.os.Build
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -20,42 +22,42 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_ONE_SHOT)
+        var settings: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        var editor: SharedPreferences.Editor = settings.edit()
+        var pushEnabled = settings.getBoolean("push", true)
+        if (pushEnabled) {
+            Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT)
 
-        val channelId = "My channel"
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(remoteMessage.notification?.title)
-            .setContentText(remoteMessage.notification?.body)
-            .setAutoCancel(true)
-            .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
+            val channelId = "My channel"
+            val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val notificationBuilder = NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(remoteMessage.notification?.title)
+                .setContentText(remoteMessage.notification?.body)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId,
-                "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT)
-            notificationManager.createNotificationChannel(channel)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT)
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
         }
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
-
     }
 
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
         sendRegistrationToServer(token)
-    }
-
-    private fun handleNow() {
-        Log.d(TAG, "Short lived task is done.")
     }
 
     private fun sendRegistrationToServer(token: String?) {

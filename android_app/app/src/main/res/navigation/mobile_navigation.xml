@@ -29,4 +29,8 @@
         android:id="@+id/nav_info"
         android:name="ru.adonixis.mfc56.fragment.InfoFragment"
         tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="ru.adonixis.mfc56.fragment.SettingsFragment" />
 </navigation>

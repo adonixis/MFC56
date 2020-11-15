@@ -11,6 +11,7 @@
     <string name="menu_check_status">Проверка статуса заявления</string>
     <string name="menu_workload">Загруженность офисов</string>
     <string name="menu_info">Справочная информация</string>
+    <string name="menu_settings">Настройки</string>
 
     <string name="btn_logout">Выйти</string>
     <string name="btn_google">Войти через Google</string>
@@ -40,6 +41,9 @@
     <string name="title_booking_dates">Тайм-слоты</string>
     <string name="title_ticket_done">Талон зарегистрирован</string>
     <string name="title_register_ticket">Регистрация талона</string>
+
+    <string name="key_push">push</string>
+    <string name="title_push">Push-уведомления</string>
 
     <string name="msg_token_fmt">FCM Token: %s</string>
 
