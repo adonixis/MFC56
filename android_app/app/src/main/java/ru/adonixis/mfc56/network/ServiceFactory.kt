@@ -1,9 +1,13 @@
 package ru.adonixis.mfc56.network
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object ServiceFactory {
@@ -22,8 +26,7 @@ object ServiceFactory {
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build()
-            mfcRecordService = createRetrofitService(MfcRecordService::class.java, MFC_RECORD_BASE_URL, client
-            )
+            mfcRecordService = createRetrofitService(MfcRecordService::class.java, MFC_RECORD_BASE_URL, client)
         }
         return mfcRecordService
     }
@@ -36,8 +39,7 @@ object ServiceFactory {
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build()
-            mfcStatusService = createRetrofitService(MfcStatusService::class.java, MFC_STATUS_BASE_URL, client
-            )
+            mfcStatusService = createRetrofitService(MfcStatusService::class.java, MFC_STATUS_BASE_URL, client)
         }
         return mfcStatusService
     }

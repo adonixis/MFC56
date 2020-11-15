@@ -30,11 +30,7 @@ class WorkloadFragment : Fragment() {
     private var rootView: View? = null
     private var oktmoObjects: MutableList<OktmoObject> = mutableListOf()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_workload, container, false)
         rootView = root.findViewById(R.id.root_view)
         return root
@@ -79,8 +75,8 @@ class WorkloadFragment : Fragment() {
         val types: Array<String> = listOktmo.toTypedArray()
         dialog.setItems(types) { dialog, which ->
             dialog.dismiss()
-            val unitId = oktmoObjects[which].id
-            viewModel.getCountVisitors(unitId!!)
+            val oktmoId = oktmoObjects[which].id
+            viewModel.getCountVisitors(oktmoId!!)
             progressDialog!!.show()
         }
         dialog.show()

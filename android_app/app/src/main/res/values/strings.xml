@@ -7,7 +7,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="menu_appointment">Предварительная запись</string>
+    <string name="menu_pre_record">Предварительная запись</string>
     <string name="menu_check_status">Проверка статуса заявления</string>
     <string name="menu_workload">Загруженность офисов</string>
     <string name="menu_info">Справочная информация</string>
@@ -17,6 +17,7 @@
     <string name="btn_facebook">Войти через Facebook</string>
     <string name="btn_save">Сохранить</string>
     <string name="btn_check">Проверить статус заявления</string>
+    <string name="btn_register">Записаться</string>
 
     <string name="hint_fio">ФИО</string>
     <string name="hint_snils">СНИЛС</string>
@@ -34,6 +35,11 @@
 
     <string name="title_status">Статус заявления</string>
     <string name="title_oktmo">Справочник ОКТМО</string>
+    <string name="title_units_oktmo">Подразделения по ОКТМО</string>
+    <string name="title_services">Список услуг</string>
+    <string name="title_booking_dates">Тайм-слоты</string>
+    <string name="title_ticket_done">Талон зарегистрирован</string>
+    <string name="title_register_ticket">Регистрация талона</string>
 
     <string name="msg_token_fmt">FCM Token: %s</string>
 
