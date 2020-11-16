@@ -7,7 +7,7 @@ data class BookingDatesResponse(
 )
 
 data class Content(
-    @SerializedName("2020-11-16T00:00:00.000+0500") var dates: List<BookingDate>? = null
+    @SerializedName("2020-11-17T00:00:00.000+0500") var dates: List<BookingDate>? = null
 )
 
 data class BookingDate(
